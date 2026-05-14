@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reader • Inkspire</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#f5efe6;
+      color:#171717;
+      min-height:100vh;
+      display:flex;
+    }
+
+    /* ===================== */
+    /* SIDEBAR */
+    /* ===================== */
+
+    .sidebar{
+      width:290px;
+      background:#efe7db;
+
+      border-right:1px solid rgba(0,0,0,0.06);
+
+      padding:28px 24px;
+
+      position:fixed;
+      top:0;
+      left:0;
+      bottom:0;
+
+      overflow-y:auto;
+    }
+
+    .logo{
+      margin-bottom:34px;
+    }
+
+    .logo h1{
+      font-size:1.5rem;
+      margin-bottom:4px;
+    }
+
+    .logo p{
+      color:#777;
+      font-size:0.88rem;
+      font-style:italic;
+    }
+
+    .book-info{
+      background:white;
+      border-radius:24px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,0.05);
+      margin-bottom:28px;
+      box-shadow:0 5px 18px rgba(0,0,0,0.04);
+    }
+
+    .book-cover{
+      height:220px;
+
+      background:linear-gradient(135deg,#c8ae89,#f2dfc3);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:4rem;
+    }
+
+    .book-details{
+      padding:20px;
+    }
+
+    .book-details h2{
+      font-size:1.15rem;
+      margin-bottom:10px;
+    }
+
+    .book-details p{
+      color:#666;
+      font-size:0.94rem;
+      line-height:1.7;
+    }
+
+    .progress-box{
+      margin-top:18px;
+    }
+
+    .progress-label{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:8px;
+      font-size:0.9rem;
+      color:#555;
+    }
+
+    .progress-bar{
+      height:10px;
+      border-radius:999px;
+      background:#e8dfd2;
+      overflow:hidden;
+    }
+
+    .progress{
+      width:0%;
+      height:100%;
+      background:#171717;
+      border-radius:999px;
+      transition:0.2s ease;
+    }
+
+    .chapter-list{
+      margin-top:28px;
+    }
+
+    .chapter-title{
+      margin-bottom:14px;
+      color:#555;
+      font-size:0.92rem;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .chapter{
+      padding:14px 16px;
+      border-radius:14px;
+      margin-bottom:10px;
+      cursor:pointer;
+      transition:0.16s ease;
+    }
+
+    .chapter:hover{
+      background:white;
+    }
+
+    .chapter.active{
+      background:#171717;
+      color:white;
+    }
+
+    /* ===================== */
+    /* READER */
+    /* ===================== */
+
+    .reader-area{
+      margin-left:290px;
+      width:100%;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+
+      background:rgba(245,239,230,0.84);
+
+      backdrop-filter:blur(10px);
+
+      border-bottom:1px solid rgba(0,0,0,0.05);
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      padding:18px 42px;
+
+      z-index:100;
+    }
+
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
+
+    .back-btn{
+      text-decoration:none;
+      color:#444;
+      font-weight:600;
+    }
+
+    .reading-status{
+      color:#777;
+      font-size:0.95rem;
+    }
+
+    .reader-controls{
+      display:flex;
+      gap:12px;
+    }
+
+    .control-btn{
+      border:none;
+      background:white;
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      cursor:pointer;
+      font-size:1rem;
+      box-shadow:0 4px 12px rgba(0,0,0,0.04);
+      transition:0.16s ease;
+    }
+
+    .control-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .reader-content{
+      max-width:860px;
+      margin:auto;
+      padding:80px 40px 120px;
+    }
+
+    .book-meta{
+      margin-bottom:70px;
+    }
+
+    .book-meta span{
+      color:#777;
+      font-size:0.95rem;
+    }
+
+    .book-meta h1{
+      font-size:4rem;
+      line-height:1;
+      letter-spacing:-2px;
+      margin-top:18px;
+      margin-bottom:24px;
+    }
+
+    .book-meta p{
+      color:#666;
+      line-height:1.9;
+      max-width:720px;
+      font-size:1.05rem;
+    }
+
+    .chapter-heading{
+      margin-top:60px;
+      margin-bottom:26px;
+      font-size:2.2rem;
+      letter-spacing:-1px;
+    }
+
+    .reader-text{
+      font-family:'Merriweather',serif;
+      font-size:1.18rem;
+      line-height:2.15;
+      color:#2a2a2a;
+    }
+
+    .reader-text p{
+      margin-bottom:32px;
+    }
+
+    .highlight{
+      background:#ffe9a8;
+      padding:2px 4px;
+      border-radius:6px;
+      cursor:pointer;
+    }
+
+    .quote{
+      margin:40px 0;
+      padding:28px;
+      border-left:4px solid #171717;
+      background:#f0e8dc;
+      border-radius:0 20px 20px 0;
+      font-style:italic;
+      color:#444;
+      line-height:1.9;
+    }
+
+    .bottom-actions{
+      margin-top:70px;
+
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      flex-wrap:wrap;
+      gap:20px;
+    }
+
+    .action-btn{
+      border:none;
+      cursor:pointer;
+
+      background:#171717;
+      color:white;
+
+      padding:15px 22px;
+
+      border-radius:14px;
+
+      font-weight:600;
+
+      transition:0.18s ease;
+    }
+
+    .action-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    body.dark{
+      background:#181818;
+      color:#f5f5f5;
+    }
+
+    body.dark .sidebar{
+      background:#202020;
+      border-right:1px solid rgba(255,255,255,0.06);
+    }
+
+    body.dark .book-info,
+    body.dark .control-btn{
+      background:#2a2a2a;
+      color:white;
+    }
+
+    body.dark .chapter:hover{
+      background:#2d2d2d;
+    }
+
+    body.dark .topbar{
+      background:rgba(24,24,24,0.85);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+
+    body.dark .reader-text{
+      color:#e0e0e0;
+    }
+
+    body.dark .quote{
+      background:#262626;
+      border-left:4px solid white;
+      color:#d9d9d9;
+    }
+
+    body.dark .book-meta p,
+    body.dark .book-details p,
+    body.dark .reading-status{
+      color:#b0b0b0;
+    }
+
+    body.dark .back-btn{
+      color:#e0e0e0;
+    }
+
+    @media(max-width:980px){
+
+      body{
+        flex-direction:column;
+      }
+
+      .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+      }
+
+      .reader-area{
+        margin-left:0;
+      }
+
+      .reader-content{
+        padding:60px 24px 100px;
+      }
+
+      .book-meta h1{
+        font-size:2.8rem;
+      }
+
+    }
+
+    @media(max-width:640px){
+
+      .topbar{
+        flex-direction:column;
+        gap:14px;
+        align-items:flex-start;
+      }
+
+      .reader-controls{
+        width:100%;
+      }
+
+      .control-btn{
+        flex:1;
+      }
+
+      .book-meta h1{
+        font-size:2.2rem;
+      }
+
+      .reader-text{
+        font-size:1.05rem;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+
+    <div class="logo">
+      <h1>Inkspire</h1>
+      <p>Read without distraction.</p>
+    </div>
+
+    <div class="book-info">
+
+      <div class="book-cover">
+        📘
+      </div>
+
+      <div class="book-details">
+
+        <h2>The Creative Mind</h2>
+
+        <p>
+          Exploring creativity, experimentation, interfaces, technology, and modern digital thinking.
+        </p>
+
+        <div class="progress-box">
+
+          <div class="progress-label">
+            <span>Reading Progress</span>
+            <span id="progressPercent">0%</span>
+          </div>
+
+          <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="chapter-list">
+
+      <div class="chapter-title">
+        Chapters
+      </div>
+
+      <div class="chapter active">
+        Introduction
+      </div>
+
+      <div class="chapter">
+        Building Ideas
+      </div>
+
+      <div class="chapter">
+        Learning Through Creation
+      </div>
+
+      <div class="chapter">
+        Modern Interfaces
+      </div>
+
+      <div class="chapter">
+        Digital Creativity
+      </div>
+
+    </div>
+
+  </aside>
+
+  <main class="reader-area">
+
+    <div class="topbar">
+
+      <div class="topbar-left">
+
+        <a href="library.html" class="back-btn">
+          ← Library
+        </a>
+
+        <div class="reading-status" id="statusText">
+          Reading session active
+        </div>
+
+      </div>
+
+      <div class="reader-controls">
+
+        <button class="control-btn" id="decreaseFont">
+          A-
+        </button>
+
+        <button class="control-btn" id="increaseFont">
+          A+
+        </button>
+
+        <button class="control-btn" id="themeBtn">
+          ☾
+        </button>
+
+        <button class="control-btn" id="bookmarkBtn">
+          🔖
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="reader-content">
+
+      <div class="book-meta">
+
+        <span>
+          Inkspire Originals
+        </span>
+
+        <h1>
+          The Creative Mind
+        </h1>
+
+        <p>
+          Creativity is no longer limited to giant studios or professional industries. Modern tools and experimentation allow creators to build meaningful digital experiences from anywhere.
+        </p>
+
+      </div>
+
+      <h2 class="chapter-heading">
+        Introduction
+      </h2>
+
+      <div class="reader-text" id="readerText">
+
+        <p>
+          The modern creator no longer needs massive infrastructure to begin building something meaningful.
+        </p>
+
+        <p>
+          Many creators begin without expertise. They learn through experimentation, redesigns, iteration, mistakes, and unfinished ideas.
+        </p>
+
+        <p>
+          <span class="highlight">
+            Learning while creating
+          </span>
+          has become one of the most powerful methods of modern digital growth.
+        </p>
+
+        <div class="quote">
+          “The internet transformed creation from permission-based industries into open experimentation.”
+        </div>
+
+        <p>
+          Modern digital tools reduce technical barriers while increasing creative possibilities.
+        </p>
+
+        <p>
+          Typography, spacing, rhythm, and calm interfaces influence attention more than most people realize.
+        </p>
+
+        <p>
+          A good reading platform should quietly support the reading experience rather than constantly demanding attention.
+        </p>
+
+      </div>
+
+      <div class="bottom-actions">
+
+        <button class="action-btn" id="saveBtn">
+          Save Progress
+        </button>
+
+        <button class="action-btn" id="highlightBtn">
+          Save Highlight
+        </button>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <script>
+
+    // =========================
+    // FONT SIZE SYSTEM
+    // =========================
+
+    const readerText = document.getElementById("readerText");
+
+    let currentFontSize = 1.18;
+
+    document.getElementById("increaseFont").onclick = () => {
+
+      currentFontSize += 0.08;
+
+      readerText.style.fontSize = currentFontSize + "rem";
+
+      localStorage.setItem("fontSize", currentFontSize);
+
+    };
+
+    document.getElementById("decreaseFont").onclick = () => {
+
+      currentFontSize -= 0.08;
+
+      readerText.style.fontSize = currentFontSize + "rem";
+
+      localStorage.setItem("fontSize", currentFontSize);
+
+    };
+
+    const savedFont = localStorage.getItem("fontSize");
+
+    if(savedFont){
+
+      currentFontSize = savedFont;
+
+      readerText.style.fontSize = currentFontSize + "rem";
+
+    }
+
+    // =========================
+    // DARK MODE
+    // =========================
+
+    const themeBtn = document.getElementById("themeBtn");
+
+    themeBtn.onclick = () => {
+
+      document.body.classList.toggle("dark");
+
+      if(document.body.classList.contains("dark")){
+
+        localStorage.setItem("theme","dark");
+
+      } else {
+
+        localStorage.setItem("theme","light");
+
+      }
+
+    };
+
+    const savedTheme = localStorage.getItem("theme");
+
+    if(savedTheme === "dark"){
+
+      document.body.classList.add("dark");
+
+    }
+
+    // =========================
+    // PROGRESS SYSTEM
+    // =========================
+
+    const progressBar = document.getElementById("progressBar");
+
+    const progressPercent = document.getElementById("progressPercent");
+
+    window.addEventListener("scroll", () => {
+
+      const scrollTop = window.scrollY;
+
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+
+      const progress = (scrollTop / docHeight) * 100;
+
+      progressBar.style.width = progress + "%";
+
+      progressPercent.innerText = Math.floor(progress) + "%";
+
+      localStorage.setItem("readingProgress", progress);
+
+    });
+
+    const savedProgress = localStorage.getItem("readingProgress");
+
+    if(savedProgress){
+
+      progressBar.style.width = savedProgress + "%";
+
+      progressPercent.innerText = Math.floor(savedProgress) + "%";
+
+    }
+
+    // =========================
+    // BOOKMARK
+    // =========================
+
+    document.getElementById("bookmarkBtn").onclick = () => {
+
+      localStorage.setItem("bookmarkPosition", window.scrollY);
+
+      alert("Bookmark saved!");
+
+    };
+
+    const bookmark = localStorage.getItem("bookmarkPosition");
+
+    if(bookmark){
+
+      setTimeout(() => {
+
+        window.scrollTo(0, bookmark);
+
+      }, 300);
+
+    }
+
+    // =========================
+    // SAVE BUTTON
+    // =========================
+
+    document.getElementById("saveBtn").onclick = () => {
+
+      localStorage.setItem("savedSession","true");
+
+      document.getElementById("statusText").innerText =
+      "Progress saved successfully";
+
+    };
+
+    // =========================
+    // HIGHLIGHT SYSTEM
+    // =========================
+
+    document.getElementById("highlightBtn").onclick = () => {
+
+      const selectedText = window.getSelection().toString();
+
+      if(selectedText.length > 0){
+
+        localStorage.setItem("highlightedText", selectedText);
+
+        alert("Highlight saved!");
+
+      } else {
+
+        alert("Select text first.");
+
+      }
+
+    };
+
+  </script>
+
+</body>
+</html>

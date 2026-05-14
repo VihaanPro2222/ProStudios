@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library • Inkspire</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#f5efe6;
+      color:#171717;
+      min-height:100vh;
+    }
+
+    nav{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+
+      padding:20px 8%;
+
+      border-bottom:1px solid rgba(0,0,0,0.05);
+
+      background:rgba(245,239,230,0.88);
+
+      backdrop-filter:blur(10px);
+
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+
+    .logo h1{
+      font-size:1.4rem;
+      margin-bottom:2px;
+    }
+
+    .logo p{
+      color:#777;
+      font-size:0.86rem;
+      font-style:italic;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:22px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:#444;
+      font-weight:500;
+      transition:0.18s ease;
+    }
+
+    .nav-links a:hover{
+      color:#000;
+    }
+
+    .hero{
+      padding:70px 8% 30px;
+    }
+
+    .hero h1{
+      font-size:3.6rem;
+      line-height:1;
+      letter-spacing:-2px;
+      margin-bottom:18px;
+      max-width:780px;
+    }
+
+    .hero p{
+      max-width:760px;
+      color:#666;
+      line-height:1.9;
+      font-size:1.05rem;
+    }
+
+    .library-stats{
+      display:flex;
+      gap:18px;
+      flex-wrap:wrap;
+      margin-top:34px;
+    }
+
+    .stat-card{
+      background:white;
+      border:1px solid rgba(0,0,0,0.05);
+
+      padding:20px 24px;
+
+      border-radius:22px;
+
+      min-width:180px;
+
+      box-shadow:0 5px 18px rgba(0,0,0,0.04);
+    }
+
+    .stat-card h2{
+      font-size:1.9rem;
+      margin-bottom:6px;
+    }
+
+    .stat-card p{
+      color:#777;
+      font-size:0.95rem;
+    }
+
+    .search-box{
+      margin-top:34px;
+      max-width:520px;
+    }
+
+    .search-box input{
+      width:100%;
+
+      padding:16px 18px;
+
+      border:none;
+      outline:none;
+
+      border-radius:18px;
+
+      background:white;
+
+      border:1px solid rgba(0,0,0,0.06);
+
+      font-size:1rem;
+
+      box-shadow:0 4px 18px rgba(0,0,0,0.04);
+    }
+
+    .continue-reading{
+      padding:10px 8% 40px;
+    }
+
+    .continue-card{
+      background:white;
+
+      border-radius:28px;
+
+      padding:34px;
+
+      border:1px solid rgba(0,0,0,0.05);
+
+      box-shadow:0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .continue-label{
+      display:inline-block;
+
+      padding:8px 14px;
+
+      border-radius:999px;
+
+      background:#f2eadf;
+
+      color:#555;
+
+      font-size:0.84rem;
+
+      margin-bottom:20px;
+    }
+
+    .continue-card h2{
+      font-size:2rem;
+      margin-bottom:14px;
+      letter-spacing:-1px;
+    }
+
+    .continue-card p{
+      color:#666;
+      line-height:1.9;
+      max-width:760px;
+      margin-bottom:24px;
+    }
+
+    .continue-btn{
+      display:inline-block;
+
+      text-decoration:none;
+
+      background:#171717;
+      color:white;
+
+      padding:14px 22px;
+
+      border-radius:14px;
+
+      font-weight:600;
+
+      transition:0.18s ease;
+    }
+
+    .continue-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .section-title{
+      padding:0 8%;
+      margin-bottom:24px;
+
+      font-size:2rem;
+      letter-spacing:-1px;
+    }
+
+    .books-grid{
+      padding:0 8% 90px;
+
+      display:grid;
+
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+
+      gap:28px;
+    }
+
+    .book-card{
+      background:white;
+
+      border-radius:26px;
+
+      overflow:hidden;
+
+      border:1px solid rgba(0,0,0,0.05);
+
+      box-shadow:0 8px 24px rgba(0,0,0,0.04);
+
+      transition:0.18s ease;
+    }
+
+    .book-card:hover{
+      transform:translateY(-5px);
+    }
+
+    .book-cover{
+      height:320px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      font-size:4rem;
+
+      color:white;
+    }
+
+    .cover-1{
+      background:linear-gradient(135deg,#c9b08d,#f0dfc4);
+    }
+
+    .cover-2{
+      background:linear-gradient(135deg,#9097a8,#d9dee8);
+    }
+
+    .cover-3{
+      background:linear-gradient(135deg,#ba9f87,#e7d6c7);
+    }
+
+    .cover-4{
+      background:linear-gradient(135deg,#879b8b,#d7e1d8);
+    }
+
+    .book-content{
+      padding:24px;
+    }
+
+    .book-content h3{
+      margin-bottom:10px;
+      font-size:1.2rem;
+    }
+
+    .book-author{
+      color:#888;
+      font-size:0.92rem;
+      margin-bottom:14px;
+    }
+
+    .book-content p{
+      color:#666;
+      line-height:1.7;
+      margin-bottom:20px;
+      font-size:0.96rem;
+    }
+
+    .book-footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .pages{
+      color:#777;
+      font-size:0.9rem;
+    }
+
+    .read-btn{
+      text-decoration:none;
+
+      background:#171717;
+      color:white;
+
+      padding:12px 18px;
+
+      border-radius:12px;
+
+      font-weight:600;
+
+      transition:0.18s ease;
+    }
+
+    .read-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    footer{
+      padding:40px;
+      text-align:center;
+      color:#777;
+      border-top:1px solid rgba(0,0,0,0.06);
+      background:#f1eadf;
+    }
+
+    @media(max-width:768px){
+
+      nav{
+        flex-direction:column;
+        gap:14px;
+      }
+
+      .nav-links{
+        flex-wrap:wrap;
+        justify-content:center;
+      }
+
+      .hero h1{
+        font-size:2.7rem;
+      }
+
+      .continue-card{
+        padding:26px;
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+
+  <nav>
+
+    <div class="logo">
+      <h1>Inkspire Library</h1>
+      <p>Read without distraction.</p>
+    </div>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="reader.html">Reader</a>
+      <a href="login.html">Logout</a>
+    </div>
+
+  </nav>
+
+  <section class="hero">
+
+    <h1>
+      Your calm digital reading space
+    </h1>
+
+    <p>
+      Browse immersive ebooks, continue reading where you stopped, organize your library, and experience distraction-free reading designed for comfort and focus.
+    </p>
+
+    <div class="library-stats">
+
+      <div class="stat-card">
+        <h2>124</h2>
+        <p>Books Available</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>42%</h2>
+        <p>Current Progress</p>
+      </div>
+
+      <div class="stat-card">
+        <h2>18</h2>
+        <p>Saved Highlights</p>
+      </div>
+
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Search books, authors, genres...">
+    </div>
+
+  </section>
+
+  <section class="continue-reading">
+
+    <div class="continue-card">
+
+      <div class="continue-label">
+        Continue Reading
+      </div>
+
+      <h2>
+        The Creative Mind
+      </h2>
+
+      <p>
+        Continue exploring creativity, experimentation, interfaces, digital ideas, and learning through building real projects.
+      </p>
+
+      <a href="reader.html" class="continue-btn">
+        Continue Book
+      </a>
+
+    </div>
+
+  </section>
+
+  <h2 class="section-title">
+    Popular Books
+  </h2>
+
+  <section class="books-grid">
+
+    <div class="book-card">
+
+      <div class="book-cover cover-1">
+        📘
+      </div>
+
+      <div class="book-content">
+
+        <h3>The Creative Mind</h3>
+
+        <div class="book-author">
+          By Inkspire Originals
+        </div>
+
+        <p>
+          A modern exploration of creativity, experimentation, learning, and digital thinking.
+        </p>
+
+        <div class="book-footer">
+
+          <div class="pages">
+            214 pages
+          </div>
+
+          <a href="reader.html" class="read-btn">
+            Read
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="book-card">
+
+      <div class="book-cover cover-2">
+        📖
+      </div>
+
+      <div class="book-content">
+
+        <h3>Modern Reading</h3>
+
+        <div class="book-author">
+          By Inkspire Studio
+        </div>
+
+        <p>
+          Understanding focus, typography, reading psychology, and distraction-free interfaces.
+        </p>
+
+        <div class="book-footer">
+
+          <div class="pages">
+            186 pages
+          </div>
+
+          <a href="reader.html" class="read-btn">
+            Open
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="book-card">
+
+      <div class="book-cover cover-3">
+        🎨
+      </div>
+
+      <div class="book-content">
+
+        <h3>Design Systems</h3>
+
+        <div class="book-author">
+          By Pro Studios
+        </div>
+
+        <p>
+          Learn spacing, hierarchy, typography, and modern interface design principles.
+        </p>
+
+        <div class="book-footer">
+
+          <div class="pages">
+            240 pages
+          </div>
+
+          <a href="reader.html" class="read-btn">
+            Read
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="book-card">
+
+      <div class="book-cover cover-4">
+        💡
+      </div>
+
+      <div class="book-content">
+
+        <h3>Building Ideas</h3>
+
+        <div class="book-author">
+          By Creative Labs
+        </div>
+
+        <p>
+          A guide about transforming concepts into meaningful digital experiences and products.
+        </p>
+
+        <div class="book-footer">
+
+          <div class="pages">
+            172 pages
+          </div>
+
+          <a href="reader.html" class="read-btn">
+            Open
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 Inkspire Library • Read without distraction.
+  </footer>
+
+</body>
+</html>

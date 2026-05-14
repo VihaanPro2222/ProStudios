@@ -1,0 +1,168 @@
+<!-- ========================================= -->
+<!-- FILE: login.html -->
+<!-- ========================================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inkspire Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#f5efe6;
+      min-height:100vh;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      padding:20px;
+    }
+
+    .login-card{
+      width:100%;
+      max-width:430px;
+
+      background:white;
+
+      border-radius:28px;
+
+      padding:42px;
+
+      box-shadow:0 12px 40px rgba(0,0,0,0.08);
+    }
+
+    .logo{
+      margin-bottom:28px;
+    }
+
+    .logo h1{
+      font-size:2rem;
+      color:#171717;
+      margin-bottom:6px;
+    }
+
+    .logo p{
+      color:#7b7b7b;
+      font-style:italic;
+    }
+
+    .form-group{
+      margin-bottom:18px;
+    }
+
+    .form-group label{
+      display:block;
+      margin-bottom:8px;
+      font-size:0.92rem;
+      color:#444;
+      font-weight:600;
+    }
+
+    .form-group input{
+      width:100%;
+
+      padding:15px 16px;
+
+      border:none;
+
+      background:#f3ede4;
+
+      border-radius:14px;
+
+      outline:none;
+
+      font-size:1rem;
+    }
+
+    .login-btn{
+      width:100%;
+
+      margin-top:10px;
+
+      border:none;
+
+      padding:15px;
+
+      border-radius:14px;
+
+      background:#181818;
+
+      color:white;
+
+      font-size:1rem;
+      font-weight:700;
+
+      cursor:pointer;
+
+      transition:0.18s ease;
+    }
+
+    .login-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .bottom-text{
+      margin-top:20px;
+      text-align:center;
+      color:#666;
+      font-size:0.94rem;
+    }
+
+    .bottom-text a{
+      color:#181818;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+
+    <div class="logo">
+      <h1>Inkspire</h1>
+      <p>Read without distraction.</p>
+    </div>
+
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Enter your email">
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter your password">
+    </div>
+
+    <button class="login-btn" id="loginBtn">
+      Login
+    </button>
+
+    <div class="bottom-text">
+      Don't have an account?
+      <a href="signup.html">Create one</a>
+    </div>
+
+  </div>
+
+  <script type="module" src="js/auth.js"></script>
+
+</body>
+</html>

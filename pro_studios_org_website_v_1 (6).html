@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pro Studios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #16181d;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      background: #16181d;
+    }
+
+    nav {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      backdrop-filter: blur(3px);
+      background: rgba(22,24,29,0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+    }
+
+    .logo {
+      font-family: 'Inter', sans-serif;
+      font-size: 1.7rem;
+      color: #8ab4ff;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      transition: 0.15s ease;
+      font-weight: 500;
+    }
+
+    nav ul li a:hover {
+      color: #8ab4ff;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 120px 8% 70px;
+    }
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0px);
+      }
+    }
+
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-family: 'Inter', sans-serif;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .hero h1 span {
+      color: #8ab4ff;
+      
+    }
+
+    .hero p {
+      max-width: 750px;
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #d4d4d4;
+    }
+
+    .glow-btn {
+      margin-top: 35px;
+      display: inline-block;
+      padding: 15px 28px;
+      border-radius: 10px;
+      background: #2f6fed;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      width: fit-content;
+      box-shadow: none;
+      transition: 0.15s ease;
+    }
+
+    .glow-btn:hover {
+      transform: translateY(-2px);
+      transition: 0.2s ease;
+    }
+
+    .logo:hover {
+      opacity: 0.9;
+      transition: 0.2s ease;
+    }
+
+    
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fiborder-radius: 14px;));
+      gap: 25px;
+      margin-top: 45px;
+    }
+
+    .card {
+      position: relative;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 28px;
+      border-radius: 14px;
+      backdrop-filter: blur(6px);
+      transition: 0.15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(77,166,255,0.25);
+      transition: 0.2s ease;
+    }
+
+    .card h3 {
+      color: #8ab4ff;
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 20px;
+      color: #8ab4ff;
+    }
+
+    .about-text {
+      max-width: 900px;
+      line-height: 2;
+      color: #d8d8d8;
+      font-size: 1.05rem;
+    }
+
+    .ebook-box {
+      margin-top: 40px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    iframe {
+      width: 100%;
+      height: 700px;
+      border: none;
+      background: white;
+    }
+
+    .contact-box {
+      margin-top: 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .contact-item {
+      background: rgba(255,255,255,0.025);
+      padding: 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .contact-item strong {
+      color: #8ab4ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      color: #999;
+      background: rgba(22,24,29,0.88);
+    }
+
+    .floating-ball {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,183,255,0.18), transparent 70%);
+      top: 8%;
+      right: 5%;
+      filter: blur(40px);
+    }
+
+    .floating-ball2 {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,166,255,0.12), transparent 70%);
+      bottom: 10%;
+      left: 5%;
+      filter: blur(32px);
+    }
+
+    
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-18px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.6rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      iframe {
+        height: 500px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  
+
+  <nav>
+    <div class="logo">PRO STUDIOS</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#ebooks">Ebooks</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="floating-ball"></div>
+    <div class="floating-ball2"></div>
+
+    <h1>Pro Studios <br><span>Creative Projects & Digital Ideas</span></h1>
+
+    <p>
+      Welcome to Pro Studios, a creative digital organization founded by Vihaan Vyom.
+      This is a space where browser projects, ebooks, interfaces, and creative technology ideas come together.
+      
+      I am not a professional coder and I still learn every day. I use AI tools to help
+      build projects faster and smarter, while also adding my own ideas, designs,
+      testing, direction, creativity, and improvements into everything I create.
+      
+      Pro Studios is about building, learning, experimenting, and slowly improving through real projects.
+    </p>
+
+    <a href="#ebooks" class="glow-btn">Explore Ebook Library</a>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About Vihaan</h2>
+
+    <div class="about-text">
+      <p>
+        Vihaan Vyom is a young creator and tech enthusiast who enjoys experimenting with
+        browser applications, interfaces, educational tools, editing ideas,
+        and digital experiences. Inspired by football culture, modern digital design, and
+        modern creator platforms, he started building projects through curiosity and constant learning.
+      </p>
+
+      <br>
+
+      <p>
+        Instead of waiting to become an expert first, he believes in learning while creating.
+        Many projects are built with the support of AI tools, combined with his own decisions,
+        concepts, direction, testing, design preferences, feature ideas, and creativity.
+        This allows Pro Studios to move faster while still feeling personal and original.
+      </p>
+
+      <br>
+
+      <p>
+        From lightweight software ideas to creative website concepts and ebook systems,
+        Pro Studios continues evolving as a growing digital playground powered by imagination,
+        experimentation, and ambition.
+      </p>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">Projects</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>Ebook Platform</h3>
+        <p>
+          A browser-based ebook library with embedded reading support,
+          futuristic UI design, and free access to digital content.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Creative Web Experiments</h3>
+        <p>
+          Creative website interfaces, Web interfaces, ebook systems, lightweight experiments, and creative digital projects built through curiosity and learning.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="ebooks">
+    <h2 class="section-title">Free Ebook Library</h2>
+
+    <p class="about-text">
+      Read ebooks directly inside the browser with the embedded reader.
+      This section will later include categories, search functionality,
+      bookmarks, and more interactive reading experiences.
+    </p>
+
+    <div class="ebook-box">
+      <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=https://cors.isomorphic-git.org/http://www.africau.edu/images/default/sample.pdf"></iframe>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2 class="section-title">Contact</h2>
+
+    <div class="contact-box">
+      <div class="contact-item">
+        <strong>Personal Contact:</strong><br>
+        vihaanvyomupadhyaya3@outlook.com
+      </div>
+
+      <div class="contact-item">
+        <strong>General / Other Stuff:</strong><br>
+        hihelloyellow5@gmail.com
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Pro Studios • Built By Vihaan Vyom
+  </footer>
+
+  
+</body>
+</html>
